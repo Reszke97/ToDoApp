@@ -18,6 +18,11 @@ export default {
   },
 
   created(){
+    console.log(process.env)
+    if(process.env.VUE_APP_API_URL !== ''){
+      console.log('asd')
+      this.$store.commit('setBaseURL', process.env.VUE_APP_API_URL+ ':'+ process.env.VUE_APP_PORT)
+    }
     // sprawdzenie czy refresh token istnieje
     if(localStorage.getItem('refreshToken')){
       try {

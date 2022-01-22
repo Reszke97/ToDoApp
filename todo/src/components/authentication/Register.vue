@@ -105,12 +105,13 @@
                 }
             },
             sendForm(){
-                axios.post('http://127.0.0.1:8000/api/v1/user/register/', {
+                axios.post(this.$store.state.baseURL+'/api/v1/user/register/', {
                     'email': this.email,
                     'user_name': this.userName,
                     'password': this.password1,
                 })
                 .then(response => {
+                    alert('Twoje konto zostało utworzone')
                 })
                 .catch(error => {
                     alert(error)

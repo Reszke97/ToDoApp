@@ -5,12 +5,17 @@
       <v-col :cols="6" style="padding-top:2rem">
         <v-expansion-panels>
           <v-expansion-panel
-            :color="success"
             v-for="(_data, idx) of data"
             :key="idx"
           >
-            <v-expansion-panel-header :color="_data.isDone?'grey':'white'">
+            <v-expansion-panel-header  
+              :style="_data.isDone ? { 
+                textDecoration: 'line-through!important',
+                backgroundColor: 'grey',
+              } : { textDecoration: 'none!important' }" 
+            >
               <div>{{ _data.title }}</div>
+              <div>{{ _data.deadline }}</div>
               <v-btn
                 small
                 class="item-action ml-2 mr-5"
@@ -24,6 +29,13 @@
                 color="success"
                 @click.native.stop="doneTask(_data.id)"
                 >Gotowe zadanie</v-btn
+              >
+              <v-btn
+                small
+                class="item-action ml-2 mr-5"
+                color="warning"
+                @click.native.stop="edit(_data.id)"
+                >Edytuj</v-btn
               >
               <template #actions>
                 <v-btn small text :id="`more-item-${idx}`">
@@ -46,9 +58,9 @@
                     </v-list-item>
                     <v-list-item>
                       <v-list-item-content class="py-1">
-                        <v-list-item-title>Do kiedy</v-list-item-title>
+                        <v-list-item-title>Data utworzenia</v-list-item-title>
                         <v-list-item-subtitle>{{
-                            _data.deadline
+                            _data.created_at
                         }}</v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
@@ -87,11 +99,12 @@
             deleteTask(id){
                 AUTH_API.delete('/api/v1/addtodo/'+ '?id=' + id)
                 .then(res=>{
-                    console.log(res.data)
+                    alert('usunięto wybrane zadanie')
+                    window.location.reload(true);
                 })
                 .catch(err=>{
+                  alert(err)
                     console.log(err.data)
-                    window.location.reload(true);
                 })
             },
             doneTask(id){
@@ -103,6 +116,10 @@
                 .catch(err=>{
                     console.log(err.data)
                 })
+            },
+            edit(id){
+              this.$router.push({ path: '/edit/?id=' + id })
+              
             }
         }
     }

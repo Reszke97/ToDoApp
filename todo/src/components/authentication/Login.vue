@@ -86,7 +86,7 @@
                 }
             },
             login(){
-                axios.post('http://127.0.0.1:8000/api/v1/token/', {
+                axios.post(this.$store.state.baseURL+'/api/v1/token/', {
                     email: this.email,
                     password: this.password1,
                     type: 'login'

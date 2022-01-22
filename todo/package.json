@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "cross-env VUE_APP_PORT=${DJANGO_PORT} VUE_APP_API_URL=${API_URL} PORT=${VUE_PORT} vue-cli-service serve ",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -21,6 +21,7 @@
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-service": "^4.5.15",
     "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.3",
     "eslint-plugin-vue": "^6.2.2",
     "vue-template-compiler": "^2.6.11"
   },

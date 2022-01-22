@@ -3,7 +3,17 @@ import store from '../store/index';
 
 
 
-const baseURL = 'http://127.0.0.1:8000'
+let baseURL = ''
+
+if(process.env.VUE_APP_API_URL === ''){
+	baseURL = 'http://127.0.0.1:8000'
+	console.log(baseURL)
+}
+else{
+	baseURL = process.env.VUE_APP_API_URL+ ':'+ process.env.VUE_APP_PORT
+	console.log(baseURL)
+}
+
 const AUTH_API = axios.create({
     baseURL: baseURL,
     timeout: 5000,

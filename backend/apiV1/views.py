@@ -66,6 +66,21 @@ class AddToDo(APIView):
         except Exception:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+    def patch(self, request, *args, **kwargs):
+        user_id = request.user.id
+        try:
+            data = Task.objects.get(id=request.query_params.get('id'))
+            if data.user_id == user_id:
+                serializer = AddToDoSerializer(data, data=request.data)
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(status=status.HTTP_200_OK)
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+        except Exception:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
     def put(self, request, *args, **kwargs):
         user_id = request.user.id
         try:
@@ -81,6 +96,21 @@ class AddToDo(APIView):
                 return Response(status=status.HTTP_400_BAD_REQUEST)
         except Exception:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+class GetTask(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request, *args, **kwargs):
+        user_id = request.user.id
+        try:
+            data = Task.objects.get(id=request.query_params.get('id'))
+            if data.user_id == user_id:
+                serializer = AddToDoSerializer(data)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+        except Exception:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
     
 

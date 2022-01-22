@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>To do App</h1>
+        <h1>Witaj w aplikacji To Do !</h1>
     </div>
 </template>
 

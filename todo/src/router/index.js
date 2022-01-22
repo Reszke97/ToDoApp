@@ -7,7 +7,7 @@ import Logout from '../components/authentication/Logout.vue'
 import Home from '../components/home/Home.vue'
 import AddTodo from '../components/todo/addtodo.vue'
 import ToDoList from '../components/todo/todolist.vue'
-
+import EditTask from '../components/todo/edittask.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -45,6 +45,12 @@ const routes = [
     path: '/todolist',
     name: 'ToDoList',
     component: ToDoList,
+  },
+
+  {
+    path: '/edit',
+    name: 'Edit',
+    component: EditTask,
   },
   
 ]

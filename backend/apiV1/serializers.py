@@ -35,4 +35,4 @@ class AddToDoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = ('description', 'deadline', 'title', 'user_id', 'id', 'isDone')
+        fields = ('description', 'deadline', 'title', 'user_id', 'id', 'isDone', 'created_at')

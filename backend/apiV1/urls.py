@@ -11,4 +11,5 @@ urlpatterns = [
     path('api/v1/user/register/', CustomUserCreate.as_view(), name = "register"),
     path('api/v1/user/logout/', BlacklistTokenUpdateView.as_view(), name = 'logout'),
     path('api/v1/addtodo/', AddToDo.as_view(), name = 'logout'),
+    path('api/v1/gettodo/', GetTask.as_view(), name = 'get_task'),
 ]

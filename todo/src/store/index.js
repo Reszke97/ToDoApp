@@ -9,6 +9,7 @@ export default new Vuex.Store({
     accessToken: localStorage.getItem("token"),
     refreshToken: localStorage.getItem("refreshToken"),
     isAuthenticated: false,
+    baseURL: 'http://127.0.0.1:8000'
   },
   mutations: {
     setToken (state, { access, refresh }) {
@@ -17,6 +18,10 @@ export default new Vuex.Store({
       AUTH_API.defaults.headers['Authorization'] = 'JWT ' + access;
       state.accessToken = access
       state.refreshToken = refresh
+    },
+
+    setBaseURL(state, value){
+      state.baseURL = value
     },
 
     setRefreshToken (state){

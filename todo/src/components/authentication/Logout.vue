@@ -8,7 +8,7 @@
         data: () => ({
             }),
         created(){
-            axios.post('http://127.0.0.1:8000/api/v1/user/logout/', {
+            axios.post(this.$store.state.baseURL+'/api/v1/user/logout/', {
                 refresh_token: localStorage.getItem('refreshToken'),
             })
             .then(response => {
