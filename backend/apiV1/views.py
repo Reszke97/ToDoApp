@@ -4,14 +4,10 @@ from rest_framework_simplejwt.serializers import TokenVerifySerializer
 from rest_framework_simplejwt.serializers import TokenRefreshSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import (
-    SAFE_METHODS, 
     IsAuthenticated, 
-    IsAuthenticatedOrReadOnly, 
-    BasePermission, 
-    IsAdminUser, 
-    DjangoModelPermissions, 
     AllowAny
 )
+from rest_framework import generics
 from rest_framework.views import APIView
 from .models import *
 from .serializers import *
@@ -20,7 +16,7 @@ from django.http import HttpResponse
 from rest_framework import status
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework_simplejwt.views import TokenVerifyView
-from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework import filters
 
 
 class CustomUserCreate(APIView):
@@ -110,6 +106,15 @@ class GetTask(APIView):
                 return Response(status=status.HTTP_400_BAD_REQUEST)
         except Exception:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+class SearchTasks(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        user_id = request.user.id
+        queryset = Task.objects.filter(user_id=user_id).filter(isDone=request.query_params.get('isDone'))
+        serializer = AddToDoSerializer(queryset, many = True)
+        return Response(serializer.data)
 
 
     

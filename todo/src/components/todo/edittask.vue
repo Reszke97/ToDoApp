@@ -23,7 +23,6 @@
                 <v-card style="cursor: pointer; text-align:left" id="done" v-if="data2.isDone">
                     <v-alert
                         type="success"
-                        @click="test"
                     >
                         Status Zadania: Rozwiązane
                     </v-alert>
