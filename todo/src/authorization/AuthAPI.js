@@ -23,7 +23,6 @@ const AUTH_API = axios.create({
             : null,
             'Content-Type': 'application/json',
             accept: 'application/json',
-			"Access-Control-Allow-Origin": "*",
     },
 })
 
