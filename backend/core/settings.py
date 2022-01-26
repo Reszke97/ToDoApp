@@ -102,8 +102,8 @@ SIMPLE_JWT = {
 #     "http://192.168.0.110:8080",
 #     "http://192.168.43.171:8080"
 # ]
-
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
